@@ -83,4 +83,7 @@ async def generate_pipeline(request: DevOpsRequest):
         }
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        import traceback
+        print("❌ ERROR OCCURRED:", str(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Connection error.")
