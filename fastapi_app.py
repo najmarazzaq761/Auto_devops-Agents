@@ -1,5 +1,6 @@
 # fastapi_app.py
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import openai
 import os
@@ -14,6 +15,14 @@ openai.base_url = "https://api.groq.com/openai/v1/"
 
 # Define FastAPI app
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can also use ["http://localhost:5173"] for stricter control
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 class DevOpsRequest(BaseModel):
     repo_url: str
